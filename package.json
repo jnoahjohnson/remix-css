@@ -5,9 +5,13 @@
   "license": "",
   "sideEffects": false,
   "scripts": {
-    "build": "remix build",
-    "deploy": "fly deploy --remote-only",
-    "dev": "remix dev",
+    "build": "run-s build:*",
+    "build:css": "npm run generate:css -- --minify",
+    "build:remix": "remix build",
+    "dev": "run-p dev:*",
+    "dev:css": "npm run generate:css -- --watch",
+    "dev:remix": "remix dev",
+    "generate:css": "npx tailwindcss -o ./app/tailwind.css",
     "start": "remix-serve build"
   },
   "dependencies": {
@@ -23,6 +27,8 @@
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
     "eslint": "^8.15.0",
+    "npm-run-all": "^4.1.5",
+    "tailwindcss": "^3.0.24",
     "typescript": "^4.6.4"
   },
   "engines": {
