@@ -85,7 +85,7 @@ export default function Index() {
                   to="/"
                   style={
                     {
-                      "--background-color ": COLORS["red"],
+                      "--background-color ": "#F42435",
                     } as React.CSSProperties
                   }
                 >
@@ -103,7 +103,7 @@ export default function Index() {
               <ImageCover
                 style={
                   {
-                    "--background-color": "#F42435",
+                    "--background-color": COLORS[stack.background],
                   } as React.CSSProperties
                 }
               />
@@ -170,12 +170,18 @@ const GridSection = styled.section`
   display: grid;
   width: 100%;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 2.5rem;
 
   padding: 2rem 0;
 
-  /* className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 py-8" */
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 const GridItem = styled.article`
@@ -204,6 +210,7 @@ const GridItemText = styled.p`
   font-family: "Roboto Mono", monospace;
   color: white;
   position: relative;
+  cursor: default;
 `;
 
 const ImageCover = styled.div`
@@ -213,4 +220,9 @@ const ImageCover = styled.div`
   height: 100%;
   opacity: 0.4;
   background: var(--background-color);
+
+  &:hover {
+    box-shadow: 0 20px 25px -5px var(--background-color),
+      0 20px 25px -5px var(--background-color);
+  }
 `;
