@@ -1,5 +1,6 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
+import React from "react";
 import styled from "styled-components";
 
 type RemixStack = {
@@ -20,7 +21,7 @@ export const loader: LoaderFunction = () => {
       imgSrc:
         "https://images.unsplash.com/photo-1575672913784-11a7cd4f25f4?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769",
       title: "Indie",
-      background: "amber",
+      background: "yellow",
     },
     {
       imgSrc:
@@ -55,14 +56,13 @@ export default function Index() {
   const { stacks } = useLoaderData<{ stacks: RemixStack[] }>();
 
   const COLORS: any = {
-    blue: "bg-blue-900",
-    red: "bg-red-900",
-    green: "bg-green-900",
-    yellow: "bg-yellow-900",
-    orange: "bg-orange-900",
-    purple: "bg-purple-900",
-    pink: "bg-pink-900",
-    gray: "bg-gray-900",
+    blue: "#1e3a8a",
+    red: "#7f1d1d",
+    green: "#14532d",
+    yellow: "#713f12",
+    orange: "#7c2d12",
+    purple: "#581c87",
+    pink: "#831843",
   };
 
   return (
@@ -76,12 +76,21 @@ export default function Index() {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/" className=".active">
+                <Link to="/" className="active">
                   Explore
                 </Link>
               </li>
               <li>
-                <NavButton to="/">Submit</NavButton>
+                <NavButton
+                  to="/"
+                  style={
+                    {
+                      "--background-color ": COLORS["red"],
+                    } as React.CSSProperties
+                  }
+                >
+                  Submit
+                </NavButton>
               </li>
             </NavigationLinks>
           </nav>
@@ -91,7 +100,13 @@ export default function Index() {
           {stacks.map((stack) => (
             <GridItem key={stack.title} className="hover:shadow-lg">
               <GridImage src={stack.imgSrc} alt={stack.title} />
-              <ImageCover />
+              <ImageCover
+                style={
+                  {
+                    "--background-color": "#F42435",
+                  } as React.CSSProperties
+                }
+              />
               <GridItemText>{stack.title}</GridItemText>
             </GridItem>
           ))}
@@ -147,8 +162,8 @@ const NavigationLinks = styled.ul`
 const NavButton = styled(Link)`
   box-sizing: border-box;
   padding: 0.25rem 0.75rem;
-  background: red; // TODO
-  box-shadow: 0px 0px 0px 2px #ff0000; // TODO
+  background: var(--background-color);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 `;
 
 const GridSection = styled.section`
@@ -196,6 +211,6 @@ const ImageCover = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  opacity: 0.3;
-  background: blue;
+  opacity: 0.4;
+  background: var(--background-color);
 `;
