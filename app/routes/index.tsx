@@ -19,7 +19,7 @@ export const loader: LoaderFunction = () => {
       imgSrc:
         "https://images.unsplash.com/photo-1575672913784-11a7cd4f25f4?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769",
       title: "Indie",
-      background: "amber",
+      background: "yellow",
     },
     {
       imgSrc:
@@ -64,6 +64,17 @@ export default function Index() {
     gray: "bg-gray-900",
   };
 
+  const SHADOW_COLORS: any = {
+    blue: "hover:shadow-blue-900",
+    red: "hover:shadow-red-900",
+    green: "hover:shadow-green-900",
+    yellow: "hover:shadow-yellow-900",
+    orange: "hover:shadow-orange-900",
+    purple: "hover:shadow-purple-900",
+    pink: "hover:shadow-pink-900",
+    gray: "hover:shadow-gray-900",
+  };
+
   return (
     <main className="text-white">
       <div className="max-w-5xl mx-auto px-4">
@@ -97,7 +108,9 @@ export default function Index() {
           {stacks.map((stack) => (
             <article
               key={stack.title}
-              className="relative aspect-square w-full border-4 border-gray-300 hover:shadow-lg flex items-center justify-center"
+              className={`relative aspect-square w-full border-4 border-gray-300 hover:shadow-lg ${
+                SHADOW_COLORS[stack.background]
+              } flex items-center justify-center`}
             >
               <img
                 src={stack.imgSrc}
